@@ -7,7 +7,7 @@ import {
   useMemo,
   useCallback,
 } from "react";
-import { getProducts } from "../services/product.service";
+import { getProducts, updateProduct } from "../services/product.service";
 
 // ====== TYPE ======
 type Product = {
@@ -115,9 +115,12 @@ export const ShopProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   // checkout
-  const checkOut = useCallback(() => {
+  const checkOut = useCallback(async () => {
     const updatedProducts = products.map((p) => {
       const qty = cart[p.id] || 0;
+      if (qty > 0) {
+        updateProduct(p.id, qty);
+      }
       return {
         ...p,
         stock: p.stock - qty,
