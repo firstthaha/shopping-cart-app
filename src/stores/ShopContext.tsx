@@ -8,27 +8,7 @@ import {
   useCallback,
 } from "react";
 import { getProducts, updateProduct } from "../services/product.service";
-
-// ====== TYPE ======
-type Product = {
-  id: string;
-  name: string;
-  price: number;
-  stock: number;
-};
-
-type Cart = {
-  [productId: string]: number;
-};
-
-type ProductApiItem = {
-  product: {
-    id: string;
-    name: string;
-    price: number;
-  };
-  total: number;
-};
+import { Product, Cart, ProductApiItem } from "../types/product.type";
 
 type ShopContextType = {
   products: Product[];
@@ -114,7 +94,7 @@ export const ShopProvider = ({ children }: { children: React.ReactNode }) => {
     setCart({});
   }, []);
 
-  // checkout
+  // ชำระเงิน
   const checkOut = useCallback(async () => {
     const updatedProducts = products.map((p) => {
       const qty = cart[p.id] || 0;

@@ -11,9 +11,12 @@ export type Cart = {
   [productId: string]: number;
 };
 
-// รายการสินค้าในตะกร้า
-export type CartItem = {
-  product: Product; // ข้อมูลสินค้า
-  quantity: number; // จำนวนที่ซื้อ
-  subtotal: number; // ราคารวมของสินค้านี้
+// ข้อมูลสินค้า
+export type ProductApiItem = {
+  product: {
+    id: string;
+    name: string;
+    price: number;
+  };
+  total: number;
 };
